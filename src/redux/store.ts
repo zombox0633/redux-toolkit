@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterNumber from "./starter/counterNumber";
+import getDataServiceSlice from "./getDataService/getDataService.slice";
 
 export const store = configureStore({
   reducer:{
-    counter: counterNumber
+    counter: counterNumber,
+    getDataService: getDataServiceSlice.reducer
   }
 });
 

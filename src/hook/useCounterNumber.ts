@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { RootType } from "../redux/store";
+import { AppDispatch, RootType } from "../redux/store";
 import { increment } from "../redux/starter/counterNumber";
 
 function useCounterNumber() {
   const count = useSelector((state: RootType) => state.counter.value);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const onClickIncrement = () => {
     dispatch(increment());

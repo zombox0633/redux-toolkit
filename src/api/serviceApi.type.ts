@@ -10,4 +10,4 @@ export interface ApiResponseErrorType {
   error?: ApiErrorType;
 }
 
-export type FirebaseReturn<T> = Promise<[T, null] | [null | string]>;
+export type FirebaseReturn<T> = Promise<[T, null] | [null , string]>;

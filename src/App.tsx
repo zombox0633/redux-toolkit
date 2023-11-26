@@ -1,16 +1,50 @@
-import useCounterNumber from "./hook/useCounterNumber";
+import { useEffect } from "react";
+import Board from "./components/Board";
+import MessageForm from "./components/MessageForm";
+import useDataServiceAction from "./hook/useDataServiceAction";
+import useGetDataService from "./hook/useGetDataService";
 
 function App() {
-  const { count, onClickIncrement } = useCounterNumber();
+  const { sortedData, loading, error, setFetchData } = useGetDataService();
+
+  const {
+    isEditId,
+    displayMessageForm,
+    onClickEdit,
+    handleBackground,
+    setDisplayMessageForm,
+    setMessage,
+  } = useDataServiceAction({ setFetchData });
+
+  useEffect(() => {
+    if (displayMessageForm) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "auto";
+    }
+
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
+  }, [displayMessageForm]);
+
   return (
     <div>
-      <div onClick={onClickIncrement} className="container__button_add">
-        <button>add +</button>
+      {displayMessageForm && (
+        <div className="background" onClick={handleBackground} />
+      )}
+      {displayMessageForm && (
+        <MessageForm isEditId={isEditId} setMessage={setMessage} />
+      )}
+      <div className="container__button_add">
+        <button onClick={() => setDisplayMessageForm(true)}>add +</button>
       </div>
-      <div className="board__container">
-        <h1>Test Redux toolkit</h1>
-        <p>{count}</p>
-      </div>
+      <Board
+        sortedData={sortedData}
+        loading={loading}
+        error={error}
+        onClickEdit={onClickEdit}
+      />
     </div>
   );
 }
