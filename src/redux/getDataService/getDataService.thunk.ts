@@ -18,3 +18,5 @@ export const fetchDataService = createAsyncThunk(
     }
   }
 );
+
+export default fetchDataService;

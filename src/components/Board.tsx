@@ -5,9 +5,11 @@ type BoardType = {
   loading: boolean;
   error: string | null;
   onClickEdit: (id: string) => void;
+  onClickDelete: (id: string) => void
 };
 
-function Board({ sortedData, loading, error, onClickEdit }: BoardType) {
+function Board({ sortedData, loading, error, onClickEdit,onClickDelete }: BoardType) {
+
   const renderData = () => {
     if (loading) return <div className="board_status"> Loading...</div>;
     if (error) return <div className="board_status"> Error: {error}</div>;
@@ -21,7 +23,7 @@ function Board({ sortedData, loading, error, onClickEdit }: BoardType) {
         </div>
         <div>
           <button onClick={() => onClickEdit(item.id)}>update</button>
-          <button>delete</button>
+          <button onClick={()=> onClickDelete(item.id)}>delete</button>
         </div>
       </div>
     ));

@@ -6,6 +6,11 @@ export type DataServiceType = {
 
 export type GetDataServiceReturnType = DataServiceType[]
 
+export type UpdateDataServiceType = {
+  id:string
+  messageText:string
+}
+
 export interface FirebaseTimestamp {
   seconds:number
   nanoseconds:number

@@ -11,7 +11,9 @@ function App() {
     isEditId,
     displayMessageForm,
     onClickEdit,
+    onClickDelete,
     handleBackground,
+    handleSubmit,
     setDisplayMessageForm,
     setMessage,
   } = useDataServiceAction({ setFetchData });
@@ -34,7 +36,11 @@ function App() {
         <div className="background" onClick={handleBackground} />
       )}
       {displayMessageForm && (
-        <MessageForm isEditId={isEditId} setMessage={setMessage} />
+        <MessageForm
+          isEditId={isEditId}
+          handleSubmit={handleSubmit}
+          setMessage={setMessage}
+        />
       )}
       <div className="container__button_add">
         <button onClick={() => setDisplayMessageForm(true)}>add +</button>
@@ -44,6 +50,7 @@ function App() {
         loading={loading}
         error={error}
         onClickEdit={onClickEdit}
+        onClickDelete={onClickDelete}
       />
     </div>
   );

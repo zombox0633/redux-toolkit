@@ -1,11 +1,12 @@
 type MessageFormType = {
   isEditId: boolean;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   setMessage: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-function MessageForm({ isEditId, setMessage }: MessageFormType) {
+function MessageForm({ isEditId, handleSubmit, setMessage }: MessageFormType) {
   return (
-    <form className="message__form">
+    <form className="message__form" onSubmit={handleSubmit}>
       <div style={{ marginBottom: "1.5rem" }}>
         <h2 style={{ margin: "1rem 0" }}>{`${
           isEditId ? "Edit" : "Add"

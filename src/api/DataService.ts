@@ -13,6 +13,7 @@ import {
   DataServiceType,
   FirebaseTimestamp,
   GetDataServiceReturnType,
+  UpdateDataServiceType,
 } from "./DataService.type";
 import { FirebaseReturn } from "./serviceApi.type";
 
@@ -53,29 +54,30 @@ export const addDataService = async (
     const dataCol = collection(db, "lodolist");
     await addDoc(dataCol, {
       message: messageText,
-      timestamp: Timestamp,
+      timestamp: Timestamp.now(),
     });
-
     return [true, null];
   } catch (error) {
+    console.error(error);
     const errorMessage = CheckErrorMessage(error);
+    
     return [null, errorMessage];
   }
 };
 
 export const updateDataService = async (
-  id: string,
-  messageText: string
+  {id,messageText}:UpdateDataServiceType
 ): FirebaseReturn<boolean> => {
   try {
     const dataDoc = doc(db, "lodolist", id);
     await updateDoc(dataDoc, {
       message: messageText,
-      timestamp: Timestamp,
+      timestamp: Timestamp.now(),
     });
 
     return [true, null];
   } catch (error) {
+    console.error(error);
     const errorMessage = CheckErrorMessage(error);
     return [null, errorMessage];
   }
@@ -90,6 +92,7 @@ export const deleteDataService = async (
 
     return [true, null];
   } catch (error) {
+    console.error(error);
     const errorMessage = CheckErrorMessage(error);
     return [null, errorMessage];
   }
